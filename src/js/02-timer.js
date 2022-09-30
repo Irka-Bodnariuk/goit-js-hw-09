@@ -44,10 +44,10 @@ const timer = {
       }
 
       const data = this.convertMs(ms);
-      this.refs.days.textContent = this.addLeadinZero(data.days);
-      this.refs.hours.textContent = this.addLeadinZero(data.hours);
-      this.refs.minutes.textContent = this.addLeadinZero(data.minutes);
-      this.refs.seconds.textContent = this.addLeadinZero(data.seconds);
+      this.refs.days.textContent = this.addLeadingZero(data.days);
+      this.refs.hours.textContent = this.addLeadingZero(data.hours);
+      this.refs.minutes.textContent = this.addLeadingZero(data.minutes);
+      this.refs.seconds.textContent = this.addLeadingZero(data.seconds);
     }, 1000);
   },
 
@@ -75,7 +75,7 @@ const timer = {
 
     return { days, hours, minutes, seconds };
   },
-  addLeadinZero(value) {
+  addLeadingZero(value) {
     return String(value).padStart(2, '0');
   },
 };
