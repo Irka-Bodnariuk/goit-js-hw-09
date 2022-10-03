@@ -1,16 +1,9 @@
 'use strict'; //
-const throttle = require('lodash.throttle'); //
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
-
-// let step = 500;
-// let amount = 3;
-// let delay = 1000;
 
 const refs = {
   form: document.querySelector('.form'),
-  // btn: document.querySelector('button'),
 };
-// refs.form.addEventListener('input', throttle(onFormInput, 500));
 refs.form.addEventListener('submit', handleSubmit);
 
 function handleSubmit(event) {
@@ -18,27 +11,31 @@ function handleSubmit(event) {
   const {
     elements: { delay, step, amount },
   } = event.target;
-  for (let i = 1; i <= amount; i++) {
-    const position = i;
-    console.log(position);
-    createPromise(position, delay)
+  let delayAndStep = Number(delay.value);
+
+  for (let i = 1; i <= amount.value; i++) {
+    createPromise(i, delayAndStep)
       .then(({ position, delay }) => {
-        console.log(`✅ Fulfilled promise ${position} in ${delay}ms`);
+        Notify.success(`✅ Fulfilled promise ${position} in ${delay}ms`, {
+          position: 'center-center',
+        });
       })
       .catch(({ position, delay }) => {
-        console.log(`❌ Rejected promise ${position} in ${delay}ms`);
+        Notify.failure(`❌ Rejected promise ${position} in ${delay}ms`, {
+          position: 'center-center',
+        });
       });
-    delay += step;
+    delayAndStep += Number(step.value);
   }
 }
 function createPromise(position, delay) {
+  const shouldResolve = Math.random() > 0.3;
   return new Promise((resolve, reject) => {
-    const shouldResolve = Math.random() > 0.3;
     setTimeout(() => {
       if (shouldResolve) {
-        resolve({ delay, position });
+        resolve({ position, delay });
       } else {
-        reject({ delay, position, error: 'Promise error' });
+        reject({ position, delay });
       }
     }, delay);
   });

@@ -27,3 +27,11 @@ img {
 .label {
   text-transform: lowercase;
 }
+.form {
+  display: flex;
+  gap: 10px;
+}
+.form label {
+  display: grid;
+  justify-items: center;
+}
