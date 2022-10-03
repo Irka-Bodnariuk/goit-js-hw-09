@@ -8,7 +8,6 @@ refs.stasrtBtn.addEventListener('click', onClickStartBtn);
 refs.stopBtn.addEventListener('click', onClickStopBtn);
 
 function onClickStartBtn() {
-  // let isActive = true;
   intervalId = setInterval(() => {
     document.body.style.backgroundColor = getRandomHexColor();
   }, 1000);
